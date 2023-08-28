@@ -11,12 +11,12 @@ pipeline {
                           userRemoteConfigs: [[url: 'https://github.com/mrajucha/Simple-java-app.git']]])
             }
         }
-        stage('maven install'){
+        stage('maven clean inatall'){
             steps{
                 sh 'mvn clean install'
             }
         }
-        stage('Build '){
+        stage('Build Docker Image'){
             steps{
                 script{
                     sh 'docker build -t java-demo-app.jar .'
