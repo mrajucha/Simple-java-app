@@ -51,3 +51,5 @@ Note: If you are not interested in allowing All Traffic to your EC2 instance 1. 
 
 After you login to Jenkins, - Run the command to copy the Jenkins Admin Password - sudo cat /var/lib/jenkins/secrets/initialAdminPassword - Enter the Administrator password
 
+
+
