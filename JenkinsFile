@@ -11,6 +11,18 @@
                             userRemoteConfigs: [[url: 'https://github.com/mrajucha/Simple-java-app.git']]])
                 }
             }
+            stage('Compile'){
+                steps{
+                    sh "mvn clean compile"
+                }
+            }
+        
+            stage('Code Scan'){
+                steps{
+                     sh ''' $SCANNER_HOME/bin/sonar-scanner -Dsonar.url=http://35.87.44.34:9000/ -Dsonar.login=e6913f2a25c4eca867cf5db1de934beb312edb35 -Dsonar.projectName=demo-project \
+                           -Dsonar.java.binaries=. \
+                           -Dsonar.projectKey=demo-project '''
+            }
             stage('maven clean inatall'){
                 steps{
                     sh 'mvn clean install'    // builds jar file out of application
