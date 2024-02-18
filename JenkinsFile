@@ -18,10 +18,14 @@
             }
         
             stage('Code Scan'){
+                when{
+                    branch 'my-feature' // Condition to skip this step to reduce execution effort/time
+                }
                 steps{
                      sh ''' $SCANNER_HOME/bin/sonar-scanner -Dsonar.url=http://35.87.44.34:9000/ -Dsonar.login=e6913f2a25c4eca867cf5db1de934beb312edb35 -Dsonar.projectName=demo-project \
                            -Dsonar.java.binaries=. \
                            -Dsonar.projectKey=demo-project '''
+                }       
             }
             stage('maven clean inatall'){
                 steps{
@@ -35,7 +39,7 @@
                     }
                 }
             }
-            stage('Docker Push '){
+            stage('Docker login '){
                 steps{
                     withCredentials([string(credentialsId: 'dockerpwd', variable: 'dockerpwd')]) {
                             sh 'docker login -u mrajucha922 -p ${dockerpwd}'
