@@ -51,11 +51,21 @@
                     script{
                         withCredentials([string(credentialsId: 'dockerpwd', variable: 'dockerpwd')]) {
                            sh 'docker login -u mrajucha922 -p ${dockerpwd}'
-                           sh 'docker push java-demo-app.jar '
+                           sh 'docker push mrajucha922/java-demo-app:latest '  // Docker image should be in this formate(username/image-name:latest) only else error
                         }
                     }
                 }
              }
+
+             stage('Deploying demo-app to Kubernetes') {
+                steps {
+                    script {
+                          sh ('aws eks update-kubeconfig --name eks-with-jenkins --region us-west-2')
+                          sh "kubectl get ns"
+                          sh "kubectl apply -f deployment.yaml"
+                         }
+                       }
+                    }
             // post {
             //     always {
             //             junit '**/target/*.xml'
