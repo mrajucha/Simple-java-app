@@ -1,5 +1,5 @@
     pipeline {
-        agent any
+        agent any  
         tools{
             maven 'Default'
         }
@@ -46,7 +46,7 @@
                     }
                 }
             }
-             stage('Push Docker Image') {
+            stage('Push Docker Image') {
                 steps{
                     script{
                         withCredentials([string(credentialsId: 'dockerpwd', variable: 'dockerpwd')]) {
@@ -66,6 +66,7 @@
                          }
                        }
                     }
+            }
             // post {
             //     always {
             //             junit '**/target/*.xml'
@@ -74,7 +75,6 @@
             //             mail to: team@example.com, subject: 'The Pipeline failed :('
             //         }
             //     }
-            }
         }
     
 

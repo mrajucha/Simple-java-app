@@ -4,7 +4,7 @@ FROM adoptopenjdk/openjdk11:alpine-jre
 # Set the working directory inside the container
 WORKDIR /app
 
-# Copy your Java application JAR file into the container
+# Copy your Java application JAR file from host(local) into the container WORKDIR
 COPY target/Java-demo-app.jar /app/Java-demo-app.jar
 
 # Define the command to run your Java application
